@@ -11,6 +11,22 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'a-propos',
+    loadChildren: () => import('./a-propos/a-propos.module').then( m => m.AProposPageModule)
+  },
+  {
+    path: 'list-burger',
+    loadChildren: () => import('./list-burger/list-burger.module').then( m => m.ListBurgerPageModule)
+  },
+  {
+    path: 'modif-burger/:id',
+    loadChildren: () => import('./modif-burger/modif-burger.module').then(m => m.ModifBurgerPageModule)
+  },
+  {
+    path: 'add-burger',
+    loadChildren: () => import('./add-burger/add-burger.module').then( m => m.AddBurgerPageModule)
+  },
 ];
 
 @NgModule({

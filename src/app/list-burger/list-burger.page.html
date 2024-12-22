@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-back-button defaultHref="/" aria-label="Retour à la page précédente"></ion-back-button>
+    </ion-button>
+    <ion-title>Liste des Burgers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Liste des Burgers</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid *ngIf="burgers && burgers.length > 0; else noBurgers">
+    <ion-row>
+      <ion-col 
+        *ngFor="let burger of burgers" 
+        size="12" 
+        size-sm="6" 
+        size-md="4" 
+        size-lg="3">
+        
+        <ion-card>
+          <ion-thumbnail slot="start">
+            <img 
+              [src]="burger.imagePath && burger.imagePath.trim() ? burger.imagePath : 'https://archive.org/download/placeholder-image/placeholder-image.jpg'" 
+              alt="{{ burger.name }}" />
+          </ion-thumbnail>
+
+          <ion-card-header>
+            <ion-card-title>{{ burger.name }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>{{ burger.description }}</p>
+            <p><strong>{{ burger.price | currency:'EUR' }}</strong></p>
+          </ion-card-content>
+
+          <ion-footer>
+            <ion-button expand="block" (click)="shareContent()">
+              <ion-icon slot="start" name="share-outline"></ion-icon>
+              Partager
+            </ion-button>
+            <ion-button expand="block" [routerLink]="['/modif-burger', burger.id]">
+              <ion-icon slot="start" name="build-outline"></ion-icon>
+              Editer
+            </ion-button>
+            <ion-button expand="block" color="danger" (click)="deleteBurger(burger.id)" [disabled]="!burger.id">
+              <ion-icon slot="start" name="trash-outline"></ion-icon>
+              Supprimer
+            </ion-button>
+          </ion-footer>
+
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ng-template #noBurgers>
+    <ion-text color="medium" class="ion-padding">
+      <p>Aucun burger disponible pour le moment.</p>
+    </ion-text>
+  </ng-template>
+
+</ion-content>

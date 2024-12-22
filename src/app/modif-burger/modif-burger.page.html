@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-back-button defaultHref="/" aria-label="Retour à la page précédente"></ion-back-button>
+    </ion-button>
+    <ion-title>Modifier un Burger</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Modifier un Burger</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="burgerForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Nom du Burger</ion-label>
+      <ion-input formControlName="name" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-input formControlName="description" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Prix</ion-label>
+      <ion-input formControlName="price" type="number" min="0" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Image</ion-label>
+      <ion-input formControlName="imagePath" type="text"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!burgerForm.valid">Mettre à jour</ion-button>
+  </form>
+</ion-content>
